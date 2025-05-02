@@ -1,5 +1,13 @@
 import time
 from termcolor import colored
+import re
+
+def load_word_list(path: str) -> list[str]:
+  with open(path, 'r', encoding='utf-8') as f:
+    return [line.strip().upper() for line in f if line.strip()]
+
+def contains_num(word: str) -> bool:
+  return bool(re.search(r'\d+(\.\d+)?', word))
 
 class Timer:
   def __init__(self, timer_name: str):

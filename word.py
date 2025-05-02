@@ -1,5 +1,4 @@
 from slot import Slot
-from utils import LOG_ERROR
 
 
 class Word:
@@ -15,10 +14,6 @@ class Word:
   def _update_content(self) -> None:
     self._content = ''.join(slot.value or '?' for slot in self._letters)
 
-  def get_content(self) -> str:
-    self._update_content()
-    return self._content
-  
   def accept(self, word: str) -> bool:
     if len(word) != len(self._letters):
       return False
@@ -29,7 +24,7 @@ class Word:
   
   def assign(self, word: str) -> None:
     if not self.accept(word):
-      LOG_ERROR(f"Palavra '{word}' não pode ser atribuída a este slot.")
+      raise ValueError(f"Palavra '{word}' não pode ser atribuída a este slot.")
     for i, slot in enumerate(self._letters):
       slot.value = word[i]
     self._update_content()
