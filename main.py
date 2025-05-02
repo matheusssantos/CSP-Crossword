@@ -1,5 +1,6 @@
 from crossword import Crossword
-from utils import Timer, load_word_list, contains_num
+from player import Player
+from utils import Timer, load_word_list
 
 grids = [
   "11x11-20W-83L-38B",
@@ -7,9 +8,7 @@ grids = [
   # "25x25-88W-400L-225B",
 ]
 
-words = load_word_list("lista_palavras.txt")
-words_used = []
-words_trashed = []
+list_words = load_word_list("lista_palavras.txt")
 
 timer = Timer("Tempo de execução")
 timer.start()
@@ -22,30 +21,15 @@ for grid in grids:
   cw.print_grid()
   print()
 
-  for word in cw.words:
-    # print(word) #
-    for word_txt in words:
-      if word_txt not in words_used and word_txt not in words_trashed:
-        if contains_num(word_txt):
-          words_trashed.append(word_txt)
-
-        else:
-          try:
-            word.assign(word_txt)
-
-          except ValueError:
-            continue
-
-          else:
-            # print(word_txt) #
-            # print() #
-            # cw.print_new_grid() #
-            # print('\n') #
-            words_used.append(word_txt)
-            break
+  player = Player(cw, list_words)
+  player.heuristic_order_slots()
+  player.heuristic_order_words()
+  player.solve()
 
   print("\nEND:")
   cw.print_new_grid()
+
+  print()
 
 timer.end()
 timer.print_response()
