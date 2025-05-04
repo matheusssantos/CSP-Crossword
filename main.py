@@ -4,8 +4,8 @@ from utils import Timer, load_word_list
 
 grids = [
   "11x11-20W-83L-38B",
-  # "15x15-34W-169L-56B",
-  # "25x25-88W-400L-225B",
+  "15x15-34W-169L-56B",
+  "25x25-88W-400L-225B",
 ]
 
 list_words = load_word_list("lista_palavras.txt")
@@ -22,8 +22,6 @@ for grid in grids:
   print()
 
   player = Player(cw, list_words)
-  player.heuristic_order_slots()
-  player.heuristic_order_words()
   player.solve()
 
   print("\nEND:")

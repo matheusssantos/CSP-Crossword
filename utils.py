@@ -9,6 +9,9 @@ def load_word_list(path: str) -> list[str]:
 def contains_num(word: str) -> bool:
   return bool(re.search(r'\d+(\.\d+)?', word))
 
+def is_repeated(word: str) -> bool:
+  return bool(word == word[0] * len(word))
+
 class Timer:
   def __init__(self, timer_name: str):
     self.name = timer_name
