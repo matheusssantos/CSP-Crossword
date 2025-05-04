@@ -22,7 +22,7 @@ for grid in grids:
   print()
 
   player = Player(cw, list_words)
-  player.solve()
+  player.resolve_grid()
 
   print("\nEND:")
   cw.print_new_grid()
