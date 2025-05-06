@@ -24,8 +24,10 @@ class Crossword:
     LOG_CROSSWORD("Setup concluído!")
 
   def print_grid(self) -> None:
+    data = 'Grid para resolver:'
     for row in self.grid:
-      print("".join(row))
+      data += '\n' + "".join(row)
+    LOG_CROSSWORD(data)
 
   def _get_slot(self, i: int, j: int) -> Slot:
     for slot in self.slots:
@@ -75,8 +77,13 @@ class Crossword:
     LOG_CROSSWORD("Grid reconstruida com sucesso")
     return new_grid
 
-  def print_new_grid(self) -> None:
+  def get_resolved_grid(self):
     new_grid = self.__rebuild_grid()
-
+    
+    data = 'Grid resolvida:'
     for row in new_grid:
-      print("".join(row))
+      data += '\n' + "".join(row)
+    LOG_CROSSWORD(data)
+    
+    return new_grid
+  

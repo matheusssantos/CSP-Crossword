@@ -9,12 +9,19 @@ def load_word_list(path: str) -> list[str]:
 
 def contains_num(word: str) -> bool:
   return bool(re.search(r'\d+(\.\d+)?', word))
+ 
     
+LOG_HISTORY_LIST: list[str] = []
+
 
 def logger_factory(log_type: str, color: str = 'white'):
-  def log(message: str) -> None:
-    print(colored(f"[{log_type}] {message}", color))
+  def log(message: str, add_to_history = True) -> None:
+    formatted = f"[{log_type}] {message}"
+    if (add_to_history):
+      LOG_HISTORY_LIST.append(formatted)
+    print(colored(formatted, color))
   return log
+
 
 LOG_ERROR = logger_factory("ERROR", 'red')
 LOG_SYSTEM = logger_factory("SYSTEM", 'cyan')
@@ -36,3 +43,4 @@ class Timer:
     
   def print_response(self) -> None:
     LOG_TIMER(f"{self.name}: {self.result:.2f} segundos ({(self.result/60):.2f} minutos)")
+    
