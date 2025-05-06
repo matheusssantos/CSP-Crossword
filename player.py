@@ -1,7 +1,7 @@
 from crossword import Crossword
 from utils import contains_num, logger_factory
 
-LOG_PLAYER = logger_factory("PLAYER", 'cyan')
+LOG_PLAYER = logger_factory("PLAYER", 'blue')
 
 class Player:
   def __init__(self, crossword: Crossword, words: list[str]):
