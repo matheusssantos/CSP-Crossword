@@ -1,5 +1,8 @@
 from slot import Slot
 from word import Word
+from utils import logger_factory
+
+LOG_CROSSWORD = logger_factory("CROSSWORD", 'yellow')
 
 
 def load_grid(path: str) -> list[list[str]]:
@@ -9,11 +12,16 @@ def load_grid(path: str) -> list[list[str]]:
 
 class Crossword:
   def __init__(self, grid_file_path: str):
+    LOG_CROSSWORD(f"Crossword {grid_file_path.split('-')[1]} selecionado.")
+    LOG_CROSSWORD("Carregando arquivo...")
     self.grid: list[list[str]] = load_grid(grid_file_path)
     self.slots: list[Slot] = []
     self.words: list[Word] = []
+    LOG_CROSSWORD("Gerando Slots")
     self.__generate_slots()
+    LOG_CROSSWORD("Extraindo Words")
     self.__extract_words()
+    LOG_CROSSWORD("Setup concluído!")
 
   def print_grid(self) -> None:
     for row in self.grid:
@@ -63,7 +71,8 @@ class Crossword:
     for slot in self.slots:
       char = slot.value if slot.value is not None else '?'
       new_grid[slot.row][slot.col] = char
-      
+    
+    LOG_CROSSWORD("Grid reconstruida com sucesso")
     return new_grid
 
   def print_new_grid(self) -> None:

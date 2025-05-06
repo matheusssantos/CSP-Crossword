@@ -1,8 +1,8 @@
+from crossword import Crossword
 from utils import contains_num
 
 class Player:
-  def __init__(self, crossword: 'Crossword', words: list[str]):
-    self.cruzada = crossword
+  def __init__(self, crossword: Crossword, words: list[str]):
     self.palavras_slots = crossword.words # Lista de objetos Word a serem preenchidos
     self.palavras_disponiveis = words # Palavras da lista_palavras.txt
     self.palavras_usadas: list[str] = []
